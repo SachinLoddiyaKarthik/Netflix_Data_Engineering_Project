@@ -62,12 +62,12 @@ The project follows a **multi-layered architecture** to process data in structur
 
 ### **AutoLoader - Incremental Data Load**  
 ```python
-checkpoint_location = "abfss://silver@netflixprojectdlsg.dfs.core.windows.net/checkpoint"
+checkpoint_location = "abfss://silver@netflixprojectdlsachin.dfs.core.windows.net/checkpoint"
 df = spark.readStream\
   .format("cloudFiles")\
   .option("cloudFiles.format", "csv")\
   .option("cloudFiles.schemaLocation", checkpoint_location)\
-  .load("abfss://raw@netflixprojectdlsg.dfs.core.windows.net")
+  .load("abfss://raw@netflixprojectdlsachin.dfs.core.windows.net")
 display(df)
 ```
 
@@ -84,14 +84,14 @@ df = df.withColumn("type_flag", when(col('type') == 'Movie', 1)
 @dlt.table(name = "gold_netflixdirectors")
 @dlt.expect_all_or_drop({"rule1": "show_id is NOT NULL"})
 def myfunc():
-    df = spark.readStream.format("delta").load("abfss://silver@netflixprojectdlsg.dfs.core.windows.net/netflix_directors")
+    df = spark.readStream.format("delta").load("abfss://silver@netflixprojectdlsachin.dfs.core.windows.net/netflix_directors")
     return df
 ```
 
 ## **Setup Instructions**  
 1. **Clone the repository**:  
    ```sh
-   git clone https://github.com/HareenaChowdary/Netflix-Data-Engineering.git
+   git clone https://github.com/SachinLoddiyaKarthik/Netflix_Data_Engineering_Project.git
    ```
 2. **Set up Azure services** (Data Factory, Databricks, Data Lake, Synapse, Power BI).  
 3. **Configure Databricks Workflows** and **Delta Live Tables (DLT)**.  
